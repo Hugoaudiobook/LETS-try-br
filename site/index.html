@@ -3,33 +3,58 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BR Anime Dub Database</title>
+<title>Brazilian Portuguese Anime Dub Database</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="topbar">
-<div><h1>🇧🇷 Brazilian Portuguese Anime</h1><p>Browse the complete catalogue. Filters remove results from the full list.</p></div>
-<div class="stats" id="stats">Loading…</div>
+  <div>
+    <h1>🇧🇷 Brazilian Portuguese Anime</h1>
+    <p>Browse anime with Brazilian Portuguese dubs. Search and filters update the full catalogue instantly.</p>
+  </div>
+  <div class="stats" id="stats">Loading catalogue…</div>
 </header>
 <main>
-<section class="controls">
-<input id="search" type="search" placeholder="Search English, Japanese or romaji title…">
-<select id="genre"><option value="">All genres</option></select>
-<select id="format"><option value="">All formats</option></select>
-<select id="sort">
-<option value="title">Title A–Z</option><option value="year-desc">Newest first</option><option value="year-asc">Oldest first</option>
-<option value="episodes-desc">Most episodes</option><option value="episodes-asc">Fewest episodes</option>
-<option value="duration-desc">Longest episodes</option><option value="duration-asc">Shortest episodes</option>
-</select>
-<label>Year <input id="yearMin" type="number" placeholder="From"> – <input id="yearMax" type="number" placeholder="To"></label>
-<label>Episodes <input id="epMin" type="number" placeholder="Min"> – <input id="epMax" type="number" placeholder="Max"></label>
-<label>Minutes <input id="durMin" type="number" placeholder="Min"> – <input id="durMax" type="number" placeholder="Max"></label>
-<button id="clear">Clear filters</button>
-</section>
-<div class="toolbar"><strong id="count">Loading…</strong><span>25 per page</span><div class="pager"><button id="prev">←</button><span id="page">1</span><button id="next">→</button></div></div>
-<section id="grid" class="grid"></section>
-<div id="empty" class="empty" hidden>No anime match these filters.</div>
+  <section class="controls">
+    <input id="search" type="search" placeholder="Search English, Japanese, romaji or synonym…" autocomplete="off">
+    <select id="genre"><option value="">All genres</option></select>
+    <select id="format"><option value="">All formats</option></select>
+    <select id="status"><option value="">All statuses</option></select>
+    <label>Year <input id="yearMin" type="number" placeholder="From"> – <input id="yearMax" type="number" placeholder="To"></label>
+    <label>Episodes <input id="epMin" type="number" placeholder="Min"> – <input id="epMax" type="number" placeholder="Max"></label>
+    <label>Minutes <input id="durMin" type="number" placeholder="Min"> – <input id="durMax" type="number" placeholder="Max"></label>
+    <select id="sort">
+      <option value="title">Title A–Z</option>
+      <option value="year-desc">Newest first</option>
+      <option value="year-asc">Oldest first</option>
+      <option value="episodes-desc">Most episodes</option>
+      <option value="episodes-asc">Fewest episodes</option>
+      <option value="duration-desc">Longest episodes</option>
+      <option value="duration-asc">Shortest episodes</option>
+    </select>
+    <button id="clear" type="button">Clear filters</button>
+  </section>
+
+  <nav class="tabs" aria-label="Catalogue sections">
+    <button class="tab active" data-tab="complete">Complete catalogue</button>
+    <button class="tab" data-tab="incomplete">Incomplete data</button>
+  </nav>
+
+  <div class="toolbar">
+    <strong id="count">Loading…</strong>
+    <span>25 per page</span>
+    <div class="pager"><button id="prev" type="button">←</button><span id="page">1 / 1</span><button id="next" type="button">→</button></div>
+  </div>
+
+  <section id="grid" class="grid"></section>
+  <div id="empty" class="empty" hidden>No anime match these filters.</div>
 </main>
+
+<dialog id="details">
+  <button id="closeDetails" class="close" type="button" aria-label="Close">×</button>
+  <div id="detailsContent"></div>
+</dialog>
+
 <footer>Dub data © MyDubList — CC BY 4.0 · Metadata © AniList · Independent fork</footer>
 <script src="app.js"></script>
 </body>
